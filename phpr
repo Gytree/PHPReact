@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?php
+
+$autoload_files = [
+    "./vendor/autoload.php",
+    "../vendor/autoload.php"
+];
+
+foreach ($autoload_files as $file) {
+    if (is_file($file)) {
+        require_once $file;
+        break;
+    }
+}
+
+use Symfony\Component\Console\Application;
+use Gytree\PHPReact\Commands;
+
+$app = new Application();
+foreach (scandir(Commands::COMMANDS_PATH) as $file) {
+    $name = substr($file, 0, strripos($file, "."));
+    $class_name = "Gytree\\PHPReact\\Commands\\" . $name;
+    if (class_exists($class_name)) {
+        $app->add(new $class_name());
+    }
+}
+$app->run();

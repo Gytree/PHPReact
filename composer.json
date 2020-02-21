@@ -1,0 +1,26 @@
+{
+    "name": "gytree/php-react",
+    "description": "a react wrapper for php",
+    "type": "library",
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "Gytree",
+            "email": "pedroguarimata@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Gytree\\PHPReact\\": "./src"
+        }
+    },
+    "bin": [
+        "bin/gytree"
+    ],
+    "require": {
+        "symfony/console": "^5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8."
+    }
+}
