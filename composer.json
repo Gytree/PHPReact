@@ -1,6 +1,6 @@
 {
     "name": "gytree/php-react",
-    "description": "a react wrapper for php",
+    "description": "A simple react wrapper to php projects",
     "type": "library",
     "license": "BSD",
     "authors": [
@@ -15,7 +15,7 @@
         }
     },
     "bin": [
-        "bin/gytree"
+        "phpr"
     ],
     "require": {
         "symfony/console": "^5.0"
