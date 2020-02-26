@@ -14,7 +14,8 @@ class React
         $element = "document.getElementById('$target')";
         $props = static::getComponentPropsString($component);
         $component = "React.createElement(components." . $component->name() . ", $props)";
-        return "<script>ReactDOM.render($component, $element);</script>";
+        
+        return "<script>window.addEventListener(\"load\", function(){ReactDOM.render($component, $element)});</script>";
     }
 
     protected static function getComponentPropsString(Component $component): string

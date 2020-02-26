@@ -16,7 +16,9 @@ $hello = new Component("Hello", ['name' => "Gytree"]);
 
 <body>
     <div id="hello"></div>
+    <div id="h2"></div>
     <?= React::render($hello, "hello") ?>
+    <?= React::render($hello, "h2") ?>
 </body>
 
 </html>
