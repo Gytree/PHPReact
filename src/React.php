@@ -28,7 +28,7 @@ class React
 
     public static function addBundle($path)
     {
-        static::$_bundles[] = "<script src=\"$path\"></script>";
+        static::$_bundles[] = $path;
     }
 
     public static function setComponentsPath($path)
@@ -38,16 +38,25 @@ class React
 
     public static function assets()
     {
+        $scripts = self::getRequiredScripts();
+        return array_map(function ($script) {
+            if (substr($script, 0, 4) !== "http") {
+                $script = "<script src=\"$script\"></script>";
+            } else {
+                $script = "<script crossorigin src=\"$script\"></script>";
+            }
+            return $script;
+        }, $scripts);
+    }
+
+    public static function getRequiredScripts()
+    {
         $environment = static::getEnvMode();
-
-        $assets = [
-            "<script crossorigin src=\"https://unpkg.com/react@16/umd/react.$environment.min.js\"></script>",
-            "<script crossorigin src=\"https://unpkg.com/react-dom@16/umd/react-dom.$environment.min.js\"></script>"
+        $scripts = [
+            "https://unpkg.com/react@16/umd/react.$environment.min.js",
+            "https://unpkg.com/react-dom@16/umd/react-dom.$environment.min.js"
         ];
-
-        $assets = array_merge($assets, static::$_bundles ?? []);
-
-        return $assets;
+        return array_merge($scripts, static::$_bundles ?? []);
     }
 
     protected static function getEnvMode()
