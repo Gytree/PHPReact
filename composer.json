@@ -2,7 +2,7 @@
     "name": "gytree/php-react",
     "description": "A simple react wrapper to php projects",
     "type": "library",
-    "license": "BSD",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Gytree",
