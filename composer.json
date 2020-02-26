@@ -1,5 +1,4 @@
 {
-    "version": "1.0.0-alpha1",
     "name": "gytree/php-react",
     "description": "A simple react wrapper to php projects",
     "type": "library",
