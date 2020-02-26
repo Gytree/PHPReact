@@ -11,10 +11,19 @@ class React
 
     public static function render(Component $component, string $target): string
     {
-        # Todo: agregar parametros a los componentes
         $element = "document.getElementById('$target')";
-        $component = "React.createElement(components." . $component->name() . ")";
+        $props = static::getComponentPropsString($component);
+        $component = "React.createElement(components." . $component->name() . ", $props)";
         return "<script>ReactDOM.render($component, $element);</script>";
+    }
+
+    protected static function getComponentPropsString(Component $component): string
+    {
+        $props = "{}";
+        if ($component_props = $component->getProps()) {
+            return json_encode($component_props);
+        }
+        return $props;
     }
 
     public static function addBundle($path)

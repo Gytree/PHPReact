@@ -4,15 +4,22 @@ namespace Gytree\PHPReact;
 
 class Component
 {
-    protected $component_name;
+    protected $name;
+    protected $props;
 
-    public function __construct(string $component_name)
+    public function __construct(string $name, array $props = [])
     {
-        $this->component_name = $component_name;
+        $this->name = $name;
+        $this->props = $props;
     }
 
     public function name(): string
     {
-        return $this->component_name;
+        return $this->name;
+    }
+
+    public function getProps(): array
+    {
+        return $this->props;
     }
 }

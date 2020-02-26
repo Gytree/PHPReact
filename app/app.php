@@ -4,7 +4,8 @@ use Gytree\PHPReact\React;
 use Gytree\PHPReact\Component;
 
 
-$hello = new Component("Hello");
+$hello = new Component("Hello", ['name' => "Gytree"]);
+
 ?>
 <html lang="en">
 

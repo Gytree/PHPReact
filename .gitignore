@@ -3,3 +3,4 @@
 /.phpunit.*
 /vendor
 /app/react
+/phpreact.code-workspace
