@@ -45,7 +45,7 @@ class React
             "<script crossorigin src=\"https://unpkg.com/react-dom@16/umd/react-dom.$environment.min.js\"></script>"
         ];
 
-        $assets = array_merge($assets, static::$_bundles);
+        $assets = array_merge($assets, static::$_bundles ?? []);
 
         return $assets;
     }
