@@ -16,6 +16,8 @@ class BuildCommand extends Command
     protected $build_path;
     protected $components_path;
 
+    protected $output;
+
     protected function configure()
     {
         $this->addArgument(
@@ -27,6 +29,7 @@ class BuildCommand extends Command
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->output = $output;
         $this->work_path  = $input->getArgument("path");
         if (!is_dir($this->work_path) and !mkdir($this->work_path)) {
             $output->writeln("Unable resolve the work path");
@@ -38,6 +41,7 @@ class BuildCommand extends Command
             return -1;
         }
 
+        $this->setupBuildSettings();
         $this->components_path = $this->work_path . DIRECTORY_SEPARATOR . "components";
 
         if (!$this->buildComponentsIndex()) {
@@ -115,17 +119,23 @@ class BuildCommand extends Command
     protected function setupBuildSettings(): void
     {
         $settings = ["output_path" => $this->work_path];
-        $ini_file = realpath($this->work_path + DIRECTORY_SEPARATOR + "phpr.ini");
-        if (!is_file($ini_file)) {
-            $ini_content = parse_ini_file($ini_file);
-            if (key_exists("output_path", $ini_content)) {
-                $path = $ini_content["output_path"];
+        $settings_path = $this->work_path . DIRECTORY_SEPARATOR . "phpr.json";
+        if (is_file($settings_path)) {
+            $decoded = json_decode(file_get_contents($settings_path), true);
+            if (key_exists("output_path", $decoded)) {
+
+                $path = $decoded["output_path"];
                 $path = realpath(implode(DIRECTORY_SEPARATOR, [$this->work_path, $path]));
-                if (is_dir($path)) {
+                if ($path === false) {
+                    $this->output->writeln(
+                        "Unable to resolve the setting output_path: "
+                            . $decoded["output_path"] . "\nmake sure that the path"
+                            . " exists and you have write permissions"
+                    );
+                } else if (is_dir($path)) {
                     $settings["output_path"] = $path;
                 }
             }
-            $settings = array_merge($settings,  parse_ini_file($ini_file));
         }
         $settings_file = $this->build_path . DIRECTORY_SEPARATOR . "settings.json";
         file_put_contents($settings_file, json_encode($settings));

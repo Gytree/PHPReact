@@ -11,7 +11,7 @@ if (settings.hasOwnProperty("output_path")) {
 
 module.exports = [
     "source-map"
-].map(devtool => ({
+].map(() => ({
     entry: "./index.js",
     mode: "development",
     module: {

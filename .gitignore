@@ -3,4 +3,5 @@
 /.phpunit.*
 /vendor
 /app/react
+/app/assets
 /phpreact.code-workspace
