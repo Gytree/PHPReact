@@ -1,7 +1,13 @@
+const fs = require("fs");
 const path = require("path");
 const webpack = require("webpack");
 
-const work_path = '';
+const settings = JSON.parse(fs.readFileSync("settings.json"));
+
+var output_path = '.';
+if (settings.hasOwnProperty("output_path")) {
+    output_path = settings["output_path"];
+}
 
 module.exports = [
     "source-map"
@@ -24,8 +30,8 @@ module.exports = [
     },
     resolve: {extensions: ["*", ".js", ".jsx"]},
     output: {
-        path: path.resolve(work_path),
-        publicPath: work_path,
+        path: path.resolve(output_path),
+        publicPath: output_path,
         filename: "components.js",
         library: "components",
         libraryTarget: "umd",
