@@ -93,6 +93,10 @@ class BuildCommand extends Command
         $content = "";
         $exports = "";
         foreach ($files as $file_name) {
+            $ext = substr($file_name, strrpos($file_name, "."));
+            if (!in_array($ext, [".js", ".jsx"])) {
+                continue;
+            }
             $component_name = substr($file_name, 0, strrpos($file_name, "."));
             $component_path =  $this->components_path . DIRECTORY_SEPARATOR . $component_name;
             $content .= "import $component_name from '$component_path';";
