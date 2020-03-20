@@ -2,6 +2,5 @@
 /.vscode
 /.phpunit.*
 /vendor
-/app/react
-/app/assets
+/example_app/assets
 /phpreact.code-workspace
