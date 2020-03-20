@@ -1,3 +1,17 @@
 {
-    "mode": "development"
+    "mode_comment": [
+        "The model setting can be 'development' or 'production' on the development mode the source",
+        "maps are generated"
+    ],
+    "mode": "development",
+    "output_comment": [
+        "The output setting is relative to the work directory the same as this configuration file"
+    ],
+    "output": "../assets",
+    "bundle_name_comment": [
+        "the bundle setting allow change the name of the library that it's expose by the generated",
+        "bundle by default the bundle name it's components and a global module it's expose with the",
+        "same name"
+    ],
+    "bundle_name": "Gytree"
 }

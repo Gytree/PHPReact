@@ -126,16 +126,24 @@ class BuildCommand extends Command
 
     protected function setupBuildSettings(): void
     {
-        $settings_path = $this->work_path . "phpr.json";
-
         $settings = ["output" => $this->work_path];
+
+        $settings_path = $this->work_path . "phpr.json";
         if (is_file($settings_path)) {
             $content = json_decode(file_get_contents($settings_path), true);
             if ($content) {
-                $output = $settings["output"] ?? null;
-                if ($output and !is_dir($output)) {
-                    $output = realpath($this->work_path . $output) ?: $this->work_path;
+                $output = $content["output"] ?? null;
+                $this->output->writeln($this->work_path . $output);
+                $output = realpath($this->work_path . $output);
+                if ($output) {
                     $content["output"] = $output;
+                } else {
+                    $this->output->writeln(
+                        "The output path it's invalid and cannot be resolved "
+                        . "please make sure that it's a valid directory, the "
+                        . "files will be generate on the working directory"
+                    );
+                    unset($content["output"]);
                 }
                 $settings = array_merge($settings, $content);
             }
