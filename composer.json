@@ -18,6 +18,7 @@
         "phpr"
     ],
     "require": {
+        "ext-json": "*",
         "symfony/console": "^5.0"
     },
     "require-dev": {
