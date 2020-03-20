@@ -1,7 +1,7 @@
 {
   "license": "BSD3",
   "scripts": {
-    "build": "webpack --mode production"
+    "build": "webpack"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
